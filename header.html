@@ -1,0 +1,112 @@
+/**
+* Template additional header, included in the main and detail files
+* It provides a background picture chooser.
+* "Save" function is currently a stub (some server-side PHP would be needed).
+*/
+
+<div id="#bg_chooser">
+    <span id="bg_m10" title="-10">«</span>&nbsp;<span id="bg_min" title="Prev">-</span>&nbsp;<span id="bg_num" title="Reset backround">01</span>&nbsp;<span id="bg_plu" title="Next">+</span>&nbsp;<span id="bg_p10" title="+10">»</span>&nbsp;<span id="bg_save" title="Choose this background">save</span>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        var bg_url = jQuery('html').css('background-image');
+        var i = bg_url.indexOf('.jpg")');
+        var bg_indx = bg_url.substring(i-2, i);
+        jQuery('#bg_num').html(bg_indx);
+    });
+    jQuery('#bg_m10').click(function(e){
+        var bg_url = jQuery('html').css('background-image');
+        var i = bg_url.indexOf('.jpg")');
+        var bg_indx = bg_url.substring(i-2, i);
+        if (bg_indx == "01") return;
+        bg_url = bg_url.substring(0, i-2);
+        i = parseInt(bg_indx, 10);
+        if (i < 11) {
+            bg_indx = "01";
+        } else {
+            i -= 10;
+            bg_indx = "";
+            if (i < 10) bg_indx = "0";
+            bg_indx = bg_indx.concat(i.toString());
+        }
+        bg_url = bg_url.concat(bg_indx, '.jpg")');
+        jQuery('html').css('background-image', bg_url);
+        jQuery('body').css('background-image', bg_url);
+        jQuery('#bg_num').html(bg_indx);
+    });
+    jQuery('#bg_min').click(function(e){
+        var bg_url = jQuery('html').css('background-image');
+        var i = bg_url.indexOf('.jpg")');
+        var bg_indx = bg_url.substring(i-2, i);
+        if (bg_indx == "01") return;
+        bg_url = bg_url.substring(0, i-2);
+        i = parseInt(bg_indx, 10);
+        i -= 1;
+        bg_indx = "";
+        if (i < 10) bg_indx = "0";
+        bg_indx = bg_indx.concat(i.toString());
+        bg_url = bg_url.concat(bg_indx, '.jpg")');
+        jQuery('html').css('background-image', bg_url);
+        jQuery('body').css('background-image', bg_url);
+        jQuery('#bg_num').html(bg_indx);
+    });
+    jQuery('#bg_num').click(function(e){
+        var bg_url = jQuery('html').css('background-image');
+        var i = bg_url.indexOf('.jpg")');
+        var bg_indx = bg_url.substring(i-2, i);
+        if (bg_indx == "01") return;
+        bg_url = bg_url.substring(0, i-2);
+        bg_indx = "01";
+        bg_url = bg_url.concat(bg_indx, '.jpg")');
+        jQuery('html').css('background-image', bg_url);
+        jQuery('body').css('background-image', bg_url);
+        jQuery('#bg_num').html(bg_indx);
+    });
+    jQuery('#bg_plu').click(function(e){
+        var bg_url = jQuery('html').css('background-image');
+        var i = bg_url.indexOf('.jpg")');
+        var bg_indx = bg_url.substring(i-2, i);
+        bg_url = bg_url.substring(0, i-2);
+        i = parseInt(bg_indx, 10);
+        i += 1;
+        if (i > 99) i = 99;
+        bg_indx = "";
+        if (i < 10) bg_indx = "0";
+        bg_indx = bg_indx.concat(i.toString());
+        bg_url = bg_url.concat(bg_indx, '.jpg")');
+        jQuery('html').css('background-image', bg_url);
+        jQuery('body').css('background-image', bg_url);
+        jQuery('#bg_num').html(bg_indx);
+    });
+    jQuery('#bg_p10').click(function(e){
+        var bg_url = jQuery('html').css('background-image');
+        var i = bg_url.indexOf('.jpg")');
+        var bg_indx = bg_url.substring(i-2, i);
+        bg_url = bg_url.substring(0, i-2);
+        i = parseInt(bg_indx, 10);
+        i += 10;
+        if (i > 99) i = 99;
+        bg_indx = i.toString();
+        bg_url = bg_url.concat(bg_indx, '.jpg")');
+        jQuery('html').css('background-image', bg_url);
+        jQuery('body').css('background-image', bg_url);
+        jQuery('#bg_num').html(bg_indx);
+    });
+    jQuery('#bg_save').click(function(e){
+/* Something like this
+
+        if (confirm('Set this background as permanent:')) {
+            var bg_url = jQuery('html').css('background-image');
+            var i = bg_url.indexOf('.jpg")');
+            var bg_indx = bg_url.substring(i-2, i);
+            var action = 'bgimg=';
+            action = action.concat(bg_indx);
+            jQuery.ajax({
+                type: 'POST',
+                url: '?do=theme',
+                data: action,
+            });
+        }
+*/
+    });
+</script>
